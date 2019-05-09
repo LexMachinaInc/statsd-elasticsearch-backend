@@ -1,10 +1,10 @@
 // module dependencies
-var http = require('http'),
+var https = require('https'),
     url = require('url');
 
 
  /**
-  * UrlReq - Wraps the http.request function making it nice for unit testing APIs.
+  * UrlReq - Wraps the https.request function making it nice for unit testing APIs.
   * 
   * @param  {string}   reqUrl   The required url in any form
   * @param  {object}   options  An options object (this is optional)
@@ -19,7 +19,7 @@ exports.urlReq = function(reqUrl, options, cb){
     // parse url to chunks
     reqUrl = url.parse(reqUrl);
 
-    // http.request settings
+    // https.request settings
     var settings = {
         host: reqUrl.hostname,
         port: reqUrl.port || 80,
@@ -34,7 +34,7 @@ exports.urlReq = function(reqUrl, options, cb){
     };
 
     // MAKE THE REQUEST
-    var req = http.request(settings);
+    var req = https.request(settings);
 
     // if there are params: write them to the request
     if(options.params){ req.write(options.params) };
